@@ -19,6 +19,14 @@ userCtrl.createUser = async function (req, res) {
     return res.json(savedUser);
 }
 
+userCtrl.updateUser = async function (req, res) {
+    const { id } = req.params;
+    const { username, password } = req.body;
+
+    await User.findByIdAndUpdate (id, { username, password });
+    res.json({ status: 'User updated' });
+}
+
 userCtrl.deleteUser = async function (req, res) {
     const { id } = req.params;
 
