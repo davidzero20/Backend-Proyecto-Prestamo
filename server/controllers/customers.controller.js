@@ -22,10 +22,21 @@ customersCtrl.createCustomers =  async function  (req, res) {
 
     return res.json({savedCustomers});
 }
-/* 
-customersCtrl.editCustomers =  function() {
-    
-} */
+
+customersCtrl.updateCustomers = async function(req, res) {
+    const { id } = req.params;
+    const { name, address, email, phone, userID } = req.body;
+
+    await Customers.updateOne({ _id: id }, {
+        name,
+        address,
+        email,
+        phone,
+        userID
+    });
+
+    res.json({status: 'Customer updated'});
+}
 
 customersCtrl.deleteCustomers = async function(req, res) {
     const { id } = req.params;
